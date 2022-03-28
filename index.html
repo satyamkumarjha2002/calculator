@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masai calculator</title>
+  <style>
+    *{
+      font-family: sans-serif;
+    }
+    h1 {
+      text-align: center;
+      font-size: 60px;
+      color: teal;
+    }
+
+    #calculator {
+      width: 350px;
+      height: 400px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    #input {
+      width: 77%;
+      height: 15%;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      margin: auto;
+
+    }
+
+    #keyboard {
+      display: grid;
+      width: 77%;
+      height: 60%;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      gap: 7px;
+      margin: auto;
+      margin-top: 10%;
+    }
+
+    #keyboard>div {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     border-radius: 7px;
+    }
+    #keyboard>div:hover,#keyboard>div:active{
+      background-color: teal;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    }
+    #keyboard>div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    P{
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .black{
+      background-color: black;
+      color: white;
+    }
+    .red{
+      background-color: red;
+      color: white;
+    }
+    #dis{
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+      width: 77%;
+      height: 70px;
+      font-size: 20px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.062);
+      color: rgb(48, 44, 44);
+      box-shadow: rgba(0, 0, 0, 0.226) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    }
+    #dot{
+      grid-column: 1/2;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #delet{
+      grid-column: 2/5;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+    #keyboard>#delet:hover{
+     background-color:  red;
+    }
+    @media all and (max-width:550px){
+     #clculator{
+       width: 100%;
+     }
+     h1{
+       font-size: 25px;
+     }
+     #keyboard{
+       width: 100%;
+     }
+     #dis{
+       width: 100%;
+       font-size: 27px;
+     }
+
+    }
+    /* use grid to acheive the layout */
+  </style>
+</head>
+
+<body>
+  <h1>Masai calculator</h1>
+  <div id="calculator">
+    <div id="dis"></div>
+    <div id="keyboard">
+      <div id="dot">.</div>
+      <div id="delet">del</div>
+      <div><p>1</p></div>
+      <div><p>2</p></div>
+      <div><p>3</p></div>
+      <div class="black"><p >+</p></div>
+      <div><p>4</p></div>
+      <div><p>5</p></div>
+      <div><p>6</p></div>
+      <div class="black"><p>-</p></div>
+      <div><p>7</p></div>
+      <div><p>8</p></div>
+      <div><p>9</p></div>
+      <div class="black"><p>x</p></div>
+      <div class="red"><p >C</p></div>
+      <div><p>0</p></div>
+      <div class="black"><p >=</p></div>
+      <div class="black"><p >/</p></div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  var userinput=document.querySelectorAll("#keyboard>div");
+  var bag=document.querySelector("#dis");
+ for(var i=0;i<userinput.length;++i){
+   userinput[i].addEventListener("click",displayinput);
+ }
+ function displayinput(){
+  var targetNumber = event.target.innerText;
+  if(targetNumber=="x"){
+    targetNumber="*";
+  }
+  switch(targetNumber){
+    case "C":bag.innerText="";
+    break;
+    case "=":
+      if(bag.innerText.length<=2){
+        break;
+      }
+    bag.innerText=eval(bag.innerText);
+    break;
+    case "del":
+    var bag2=bag.innerText.split("");
+    bag2.pop();
+    var bag3="";
+    for(var i=0;i<bag2.length;++i){
+      bag3=bag3+bag2[i];
+    }
+    bag.innerText=bag3;
+    ;
+    break;
+    default:
+      bag.innerText=bag.innerText+targetNumber;
+  }
+ }
+</script>
